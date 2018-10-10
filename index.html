@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>reveal.js</title>
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides" id="slides">
+			</div>
+		</div>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script>
+			var request = new XMLHttpRequest();
+			request.open('GET','arabic-test.json');
+			request.responseType = 'json';
+			request.send();
+			request.onload = function() {
+			  var words = request.response;
+			  populateWords(words);
+			}
+
+			function populateWords(jsonObj) {
+				var wordArray = [];
+				for (var i = 0; i < 10; i++) {
+					var ind = randInt(0,jsonObj.length-1);
+					wordArray.push(jsonObj[ind]);
+					jsonObj.splice(ind,1);
+				}
+				var slidesDiv = document.getElementById('slides');
+				for (var j = 0; j < wordArray.length; j++) {
+					var createSec = document.createElement('section');
+					var testArray = [wordArray[j].eng,wordArray[j].arb,wordArray[j].prn];
+					createSec.setAttribute('id','word'+j);
+					slidesDiv.appendChild(createSec);
+					var mainSec = document.getElementById('word'+j);
+					for (var i = 0; i < testArray.length; i++) {
+						var createWord = document.createElement('h1');
+						var createSubSec = document.createElement('section');
+						createWord.textContent = testArray[i];
+						createSubSec.appendChild(createWord);
+						mainSec.appendChild(createSubSec);
+					}
+				}
+			}
+
+			function randInt(min, max) {
+			  min = Math.ceil(min);
+			  max = Math.floor(max);
+			  return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
+			}
+
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
