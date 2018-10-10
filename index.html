@@ -15,6 +15,7 @@
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
 		<script>
+			// Loads in arabic-test.json from the local directory
 			var request = new XMLHttpRequest();
 			request.open('GET','arabic-test.json');
 			request.responseType = 'json';
@@ -23,22 +24,23 @@
 			  var words = request.response;
 			  populateWords(words);
 			}
-
+			
+			// creates and populates sets of slides for each word
 			function populateWords(jsonObj) {
 				var wordArray = [];
-				for (var i = 0; i < 10; i++) {
+				for (var i = 0; i < 10; i++) { // randomly selects 10 words from jsonObj
 					var ind = randInt(0,jsonObj.length-1);
 					wordArray.push(jsonObj[ind]);
 					jsonObj.splice(ind,1);
 				}
 				var slidesDiv = document.getElementById('slides');
-				for (var j = 0; j < wordArray.length; j++) {
+				for (var j = 0; j < wordArray.length; j++) { // loops through wordArray to make a parent section for each word
 					var createSec = document.createElement('section');
-					var testArray = [wordArray[j].eng,wordArray[j].arb,wordArray[j].prn];
+					var testArray = [wordArray[j].eng,wordArray[j].arb,wordArray[j].prn]; // turns wordArray[j] into an array
 					createSec.setAttribute('id','word'+j);
 					slidesDiv.appendChild(createSec);
 					var mainSec = document.getElementById('word'+j);
-					for (var i = 0; i < testArray.length; i++) {
+					for (var i = 0; i < testArray.length; i++) { // adds a child section for each item in testArray
 						var createWord = document.createElement('h1');
 						var createSubSec = document.createElement('section');
 						createWord.textContent = testArray[i];
@@ -48,12 +50,13 @@
 				}
 			}
 
-			function randInt(min, max) {
+			function randInt(min, max) { // max and min are inclusive
 			  min = Math.ceil(min);
 			  max = Math.floor(max);
-			  return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
+			  return Math.floor(Math.random() * (max - min + 1)) + min;
 			}
-
+			
+			// Reveal.JS script starts here
 			Reveal.initialize({
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
