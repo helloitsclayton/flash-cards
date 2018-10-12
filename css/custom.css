@@ -1,0 +1,31 @@
+/*********************************************
+ * FORMS
+ *********************************************/
+
+.reveal input[type='radio'],
+.reveal input[type='checkbox'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 2em;
+  height: 2em;
+
+  border: 2px solid #999;
+  transition: 0.15s all linear;
+  outline: none; }
+
+.reveal input[type='radio'] {
+    border-radius: 50%; }
+
+.reveal input[type='radio']:checked,
+.reveal input[type='checkbox']:checked {
+  border: 0.7em solid black; }
+
+.reveal input[type='number'] {
+  font-size: inherit;
+  text-align: center;
+  width: 3em; }
+
+.reveal #submit {
+  font-size: inherit;
+  float: right; }
