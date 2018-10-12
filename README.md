@@ -6,4 +6,4 @@ All you'd need to do is drop the contents of this repository directly into an un
 
 Funcitonality is split between two pages:
 * `index.html` in the main directory contains a form which allows users to select parts of speech they wish to practice, whether they'd like to see the English or Arabic first, and the number of flash cards they'd like to have created
-* `card-stack/index.html` actually pulls the words from arabic-test.json according to the parameters passed from the above from via the URL; it then randomly selects the number of cards indicated, builds the deck, and displays them
+* `card-stack/index.html` actually pulls the words from `arabic-test.json` according to the parameters passed from the above from via the URL; it then randomly selects the number of cards indicated, builds the deck, and displays them
