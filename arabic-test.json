@@ -1,57 +1,38 @@
-[
-  {
-    "eng":"test1a",
-    "arb":"test1b",
-    "prn":"test1c"
-  },
-  {
-    "eng":"test2a",
-    "arb":"test2b",
-    "prn":"test2c"
-  },
-  {
-    "eng":"test3a",
-    "arb":"test3b",
-    "prn":"test3c"
-  },
-  {
-    "eng":"test4a",
-    "arb":"test4b",
-    "prn":"test4c"
-  },
-  {
-    "eng":"test5a",
-    "arb":"test5b",
-    "prn":"test5c"
-  },
-  {
-    "eng":"test6a",
-    "arb":"test6b",
-    "prn":"test6c"
-  },
-  {
-    "eng":"test7a",
-    "arb":"test7b",
-    "prn":"test7c"
-  },
-  {
-    "eng":"test8a",
-    "arb":"test8b",
-    "prn":"test8c"
-  },
-  {
-    "eng":"test9a",
-    "arb":"test9b",
-    "prn":"test9c"
-  },
-  {
-    "eng":"test10a",
-    "arb":"test10b",
-    "prn":"test10c"
-  },
-  {
-    "eng":"test11a",
-    "arb":"test11b",
-    "prn":"test11c"
-  }
-]
+{
+    "noun":[
+        {
+            "eng":"noun1 in English",
+            "arb":"noun1 in Arabic",
+            "prn":"pronunciation of noun1 in Arabic"
+        },
+        {
+            "eng":"noun2 in English",
+            "arb":"noun2 in Arabic",
+            "prn":"pronunciation of noun2 in Arabic"
+        }
+    ],
+    "misc":[
+        {
+            "eng":"misc1 in English",
+            "arb":"misc1 in Arabic",
+            "prn":"pronunciation of misc1 in Arabic"
+        },
+        {
+            "eng":"misc2 in English",
+            "arb":"misc2 in Arabic",
+            "prn":"pronunciation of misc2 in Arabic"
+        }
+    ],
+    "adj":[
+        {
+            "eng":"adj1 in English",
+            "arb":"adj1 in Arabic",
+            "prn":"pronunciation of adj1 in Arabic"
+        },
+        {
+            "eng":"adj2 in English",
+            "arb":"adj2 in Arabic",
+            "prn":"pronunciation of adj2 in Arabic"
+        }
+    ]
+}

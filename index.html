@@ -3,59 +3,82 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<title>reveal.js</title>
+		<title>بطاقات فلاش العربية</title>
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/simple.css">
+		<link rel="stylesheet" href="css/custom.css">
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides" id="slides">
+				<section>
+					<h2>بطاقات فلاش العربية</h2>
+					<fieldset style="text-align:left;">
+						<legend>What would you like to practice?</legend>
+						<div>
+							<input type="checkbox" name="noun" id="noun" checked />
+							<label for="noun">Nouns</label>
+						</div>
+						<div>
+							<input type="checkbox" id="adj" name="adj" checked />
+							<label for="adj">Adjectives</label>
+						</div>
+						<div>
+							<input type="checkbox" id="misc" name="misc" checked />
+							<label for="misc">Pronouns, Possessive Suffixes,  Misc.</label>
+						</div>
+						<hr>
+						<div>
+							<input type="radio" id="arb" name="first" checked />
+							<label for="arb">Arabic first</label>
+						</div>
+						<div>
+							<input type="radio" id="eng" name="first" />
+							<label for="eng">English first</label>
+						</div>
+						<hr>
+						<button id="submit" onclick="chooseVocab()">Start</button>
+						<div>
+							<input type="number" id="number" name="number" value="10" />
+							<label for="number">&nbsp;words</label>
+						</div>
+					</fieldset>
+				</section>
 			</div>
 		</div>
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
 		<script>
-			// Loads in arabic-test.json from the local directory
-			var request = new XMLHttpRequest();
-			request.open('GET','arabic-test.json');
-			request.responseType = 'json';
-			request.send();
-			request.onload = function() {
-			  var words = request.response;
-			  populateWords(words);
-			}
-			
-			// creates and populates sets of slides for each word
-			function populateWords(jsonObj) {
-				var wordArray = [];
-				for (var i = 0; i < 10; i++) { // randomly selects 10 words from jsonObj
-					var ind = randInt(0,jsonObj.length-1);
-					wordArray.push(jsonObj[ind]);
-					jsonObj.splice(ind,1);
+			function chooseVocab() {
+				vocabArray = [];
+				var nouns = document.querySelector('#noun');
+				var adj = document.querySelector('#adj');
+				var misc = document.querySelector('#misc');
+				var arb = document.querySelector('#arb');
+				var num = document.querySelector('#number');
+				if (nouns.checked) {
+					vocabArray.push('noun');
 				}
-				var slidesDiv = document.getElementById('slides');
-				for (var j = 0; j < wordArray.length; j++) { // loops through wordArray to make a parent section for each word
-					var createSec = document.createElement('section');
-					var testArray = [wordArray[j].eng,wordArray[j].arb,wordArray[j].prn]; // turns wordArray[j] into an array
-					createSec.setAttribute('id','word'+j);
-					slidesDiv.appendChild(createSec);
-					var mainSec = document.getElementById('word'+j);
-					for (var i = 0; i < testArray.length; i++) { // adds a child section for each item in testArray
-						var createWord = document.createElement('h1');
-						var createSubSec = document.createElement('section');
-						createWord.textContent = testArray[i];
-						createSubSec.appendChild(createWord);
-						mainSec.appendChild(createSubSec);
-					}
+				if (adj.checked) {
+					vocabArray.push('adj');
 				}
+				if (misc.checked) {
+					vocabArray.push('misc');
+				}
+				var url = '?';
+				for (var i = vocabArray.length - 1; i >= 0; i--) {
+					url = url+'vocab='+vocabArray[i]+'&';
+				}
+				if (arb.checked) {
+					url = url + 'lang=arb';
+				}
+				else {
+					url = url + 'lang=eng';
+				}
+				url = url + '&num=' + num.value;
+				window.location.href = 'card-stack' + url;
 			}
 
-			function randInt(min, max) { // max and min are inclusive
-			  min = Math.ceil(min);
-			  max = Math.floor(max);
-			  return Math.floor(Math.random() * (max - min + 1)) + min;
-			}
-			
 			// Reveal.JS script starts here
 			Reveal.initialize({
 				dependencies: [
