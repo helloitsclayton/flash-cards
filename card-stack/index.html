@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>بطاقات فلاش</title>
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/simple.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides" id="slides">
+			</div>
+		</div>
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+		<script>
+			var varURL = new URLSearchParams(window.location.search);
+			var vocabSelect = varURL.getAll('vocab');
+			var firstLang = varURL.get('lang');
+			var wordNum = varURL.get('num');
+
+			// Loads in arabic-test.json from the local directory
+			var request = new XMLHttpRequest();
+			request.open('GET','../arabic-test.json');
+			request.responseType = 'json';
+			request.send();
+			request.onload = function() {
+			  var arabicJson = request.response;
+			  var words = [];
+				for (var i = vocabSelect.length - 1; i >= 0; i--) {
+					words = words.concat(arabicJson[vocabSelect[i]]);
+			  }
+			  populateWords(words);
+			}
+
+			// creates and populates sets of slides for each word
+			 function populateWords(jsonObj) {
+				var wordArray = [];
+				for (var i = 0; i < wordNum; i++) { // randomly selects 10 words from jsonObj
+					var ind = randInt(0,jsonObj.length-1);
+					wordArray.push(jsonObj[ind]);
+					jsonObj.splice(ind,1);
+				}
+				var slidesDiv = document.getElementById('slides');
+				for (var j = 0; j < wordArray.length; j++) { // loops through wordArray to make a parent section for each word
+					var createSec = document.createElement('section');
+					if (firstLang == 'arb') { // turns wordArray[j] into an array
+						var testArray = [wordArray[j].arb,wordArray[j].eng,wordArray[j].prn]; 
+					}
+					else {
+						var testArray = [wordArray[j].eng,wordArray[j].arb,wordArray[j].prn];
+					}
+					createSec.setAttribute('id','word'+j+1);
+					slidesDiv.appendChild(createSec);
+					var mainSec = document.getElementById('word'+j+1);
+					for (var i = 0; i < testArray.length; i++) { // adds a child section for each item in testArray
+						var createWord = document.createElement('h1');
+						var createSubSec = document.createElement('section');
+						createWord.textContent = testArray[i];
+						createSubSec.appendChild(createWord);
+						mainSec.appendChild(createSubSec);
+					}
+				}
+			}
+			function randInt(min, max) { // max and min are inclusive
+			  min = Math.ceil(min);
+			  max = Math.floor(max);
+			  return Math.floor(Math.random() * (max - min + 1)) + min;
+			}
+
+			// Reveal.JS script starts here
+			Reveal.initialize({
+				dependencies: [
+					{ src: '../plugin/markdown/marked.js' },
+					{ src: '../plugin/markdown/markdown.js' },
+					{ src: '../plugin/notes/notes.js', async: true },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
