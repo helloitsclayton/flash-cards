@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<title>بطاقات فلاش العربية</title>
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/simple.css">
+		<link rel="stylesheet" href="css/simple.css">
 		<link rel="stylesheet" href="css/custom.css">
 	</head>
 	<body>
@@ -15,17 +15,21 @@
 					<h2>بطاقات فلاش العربية</h2>
 					<fieldset style="text-align:left;">
 						<legend>What would you like to practice?</legend>
-						<div>
-							<input type="checkbox" name="noun" id="noun" checked />
+						<div style="display:inline-block;">
+							<input type="checkbox" name="noun" id="noun" />
 							<label for="noun">Nouns</label>
 						</div>
-						<div>
-							<input type="checkbox" id="adj" name="adj" checked />
+						<div style="display:inline-block;padding-left:1em;">
+							<input type="checkbox" id="adj" name="adj" />
 							<label for="adj">Adjectives</label>
 						</div>
+						<div style="display:inline-block;padding-left:1em;">
+							<input type="checkbox" id="misc" name="misc" />
+							<label for="misc">Misc.</label>
+						</div>
 						<div>
-							<input type="checkbox" id="misc" name="misc" checked />
-							<label for="misc">Pronouns, Possessive Suffixes,  Misc.</label>
+							<input type="checkbox" id="quiz" name="quiz" checked />
+							<label for="quiz">Weekly vocab quiz</label>
 						</div>
 						<hr>
 						<div>
@@ -54,6 +58,7 @@
 				var nouns = document.querySelector('#noun');
 				var adj = document.querySelector('#adj');
 				var misc = document.querySelector('#misc');
+				var quiz = document.querySelector('#quiz');
 				var arb = document.querySelector('#arb');
 				var num = document.querySelector('#number');
 				if (nouns.checked) {
@@ -64,6 +69,9 @@
 				}
 				if (misc.checked) {
 					vocabArray.push('misc');
+				}
+				if (quiz.checked) {
+					vocabArray.push('quiz');
 				}
 				var url = '?';
 				for (var i = vocabArray.length - 1; i >= 0; i--) {
