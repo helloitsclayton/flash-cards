@@ -34,5 +34,17 @@
             "arb":"adj2 in Arabic",
             "prn":"pronunciation of adj2 in Arabic"
         }
+    ],
+    "vocab":[
+        {
+            "eng":"vocab1 in English",
+            "arb":"vocab1 in Arabic",
+            "prn":"pronunciation of vocab1 in Arabic"
+        },
+        {
+            "eng":"vocab2 in English",
+            "arb":"vocab2 in Arabic",
+            "prn":"pronunciation of vocab2 in Arabic"
+        }
     ]
 }
