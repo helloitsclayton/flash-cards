@@ -5,7 +5,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<title>بطاقات فلاش</title>
 		<link rel="stylesheet" href="../css/reveal.css">
-		<link rel="stylesheet" href="../css/theme/simple.css">
+		<link rel="stylesheet" href="../css/simple.css">
+		<link rel="stylesheet" href="../css/custom.css">
 	</head>
 	<body>
 		<div class="reveal">
@@ -15,32 +16,35 @@
 		<script src="../lib/js/head.min.js"></script>
 		<script src="../js/reveal.js"></script>
 		<script>
-			var varURL = new URLSearchParams(window.location.search);
-			var vocabSelect = varURL.getAll('vocab');
-			var firstLang = varURL.get('lang');
-			var wordNum = varURL.get('num');
-
-			// Loads in arabic-test.json from the local directory
+			// Loads vocab lists from arabic.json according to parameters grabbed from URL
 			var request = new XMLHttpRequest();
-			request.open('GET','../arabic-test.json');
+			request.open('GET','../arabic.json');
 			request.responseType = 'json';
 			request.send();
 			request.onload = function() {
-			  var arabicJson = request.response;
-			  var words = [];
+				var varURL = new URLSearchParams(window.location.search);
+				var vocabSelect = varURL.getAll('vocab');
+				var arabicJson = request.response;
+				var words = [];
 				for (var i = vocabSelect.length - 1; i >= 0; i--) {
 					words = words.concat(arabicJson[vocabSelect[i]]);
-			  }
-			  populateWords(words);
+				}
+				populateWords(words);
 			}
 
-			// creates and populates sets of slides for each word
-			 function populateWords(jsonObj) {
+			// selects words, then creates and populates a set of slides for each word
+			function populateWords(vocabList) {
+				var varURL = new URLSearchParams(window.location.search);
+				var firstLang = varURL.get('lang');
+				var wordNum = varURL.get('num');
+				if (wordNum > vocabList.length) {
+					wordNum = vocabList.length; // caps number of words at max possible
+				}
 				var wordArray = [];
-				for (var i = 0; i < wordNum; i++) { // randomly selects 10 words from jsonObj
-					var ind = randInt(0,jsonObj.length-1);
-					wordArray.push(jsonObj[ind]);
-					jsonObj.splice(ind,1);
+				for (var i = 0; i < wordNum; i++) { // randomly selects wordNum words from vocabList
+					var ind = randInt(0,vocabList.length-1);
+					wordArray.push(vocabList[ind]);
+					vocabList.splice(ind,1);
 				}
 				var slidesDiv = document.getElementById('slides');
 				for (var j = 0; j < wordArray.length; j++) { // loops through wordArray to make a parent section for each word
