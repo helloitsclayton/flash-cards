@@ -5,13 +5,13 @@
   "description": "Randomly selected flash cards using JSON and RevealJS",
   "author": {
       "name": "Clayton Hayes",
-      "email": "claytonllibrar@gmail.com"
+      "email": "hi.its.clayton@gmail.com"
     },
   "repository": {
     "type": "git",
-    "url": "git://github.com/claytonllibrar/flash-cards.git"
+    "url": "git://github.com/helloitsclayton/flash-cards.git"
   },
     "devDependencies": {
-    "reveal.js": "^3.7.0"
-    }
+    "reveal.js": "^5.1.0"
+  }
 }
